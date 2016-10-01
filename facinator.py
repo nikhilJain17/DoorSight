@@ -31,13 +31,15 @@ while True:
 			# draw the eye boxes
 			cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
 
-	cv2.imshow('img', img)
+	# resize the camera feed
+	cv2.namedWindow('Do not read', cv2.WINDOW_NORMAL)
+	cv2.imshow('Do not read', img)
 
 	# to break program with esc key
 	k = cv2.waitKey(30) & 0xff
 	if k == 27:
 		break;
 
-cap.release()
+capture.release()
 cv2.destroyAllWindows()
 
