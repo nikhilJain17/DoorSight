@@ -35,6 +35,9 @@ while True:
 	# resize the camera feed
 	cv2.namedWindow('No Patent Intended', cv2.WINDOW_NORMAL)
 	cv2.imshow('Patent Pending', img)
+# 	# resize the camera feed
+# 	cv2.namedWindow('Do not read', cv2.WINDOW_NORMAL)
+# 	cv2.imshow('Do not read', img)
 
 	# to break program with esc key
 	k = cv2.waitKey(30) & 0xff
