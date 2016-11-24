@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-from sklearn.decomposition import RandomizedPCA
+from sklearn.decomposition import RandomizedPCA	# part of scipy
+import scipy.misc
 import numpy as np
 import glob
 import cv2
 import math
 import os.path
 import string
+from PIL import Image # pip install Pillow
 
 
 # import the cascades
@@ -33,7 +35,7 @@ while True:
 		roi_gray = gray[y:y+h, x:x+h]
 		roi_color = img[y:y+h, x:x+h]
 
-		# only show the face box
+		# only show the face box (row, column of img numpy array to be displayed)
 		img = img[y:y+h, x:x+w]
 
 	# resize the camera feed
@@ -44,10 +46,12 @@ while True:
 # 	cv2.imshow('Do not read', img)
 	
 
-	# to break program with esc key
+	# to save img to file with esc key
 	k = cv2.waitKey(30) & 0xff
 	if k == 27:
-		break;
+		print "Saving file"
+		im = Image.fromarray(img)
+		im.save('face.jpeg')
 
 capture.release()
 cv2.destroyAllWindows()
