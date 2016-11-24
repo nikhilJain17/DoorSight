@@ -33,18 +33,16 @@ while True:
 		roi_gray = gray[y:y+h, x:x+h]
 		roi_color = img[y:y+h, x:x+h]
 
-		# eyes = eye_cascade.detectMultiScale(roi_gray)
-
-		# for(ex, ey, ew, eh) in eyes:
-		# 	# draw the eye boxes
-		# 	cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
+		# only show the face box
+		img = img[0:y+h, 0:x+w]
 
 	# resize the camera feed
-	cv2.namedWindow('No Patent Intended', cv2.WINDOW_NORMAL)
+	cv2.namedWindow('No Patent Intended', cv2.WINDOW_AUTOSIZE)
 	cv2.imshow('Patent Pending', img)
 # 	# resize the camera feed
 # 	cv2.namedWindow('Do not read', cv2.WINDOW_NORMAL)
 # 	cv2.imshow('Do not read', img)
+	
 
 	# to break program with esc key
 	k = cv2.waitKey(30) & 0xff
