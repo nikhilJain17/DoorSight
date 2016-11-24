@@ -34,7 +34,7 @@ while True:
 		roi_color = img[y:y+h, x:x+h]
 
 		# only show the face box
-		img = img[0:y+h, 0:x+w]
+		img = img[y:y+h, x:x+w]
 
 	# resize the camera feed
 	cv2.namedWindow('No Patent Intended', cv2.WINDOW_AUTOSIZE)
