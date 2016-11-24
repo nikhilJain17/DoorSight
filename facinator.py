@@ -7,6 +7,7 @@ import cv2
 import math
 import os.path
 import string
+import PIL
 from PIL import Image # pip install Pillow
 
 
@@ -36,7 +37,7 @@ while True:
 		roi_color = img[y:y+h, x:x+h]
 
 		# only show the face box (row, column of img numpy array to be displayed)
-		img = img[y:y+h, x:x+w]
+		img = roi_gray
 
 	# resize the camera feed
 	cv2.namedWindow('No Patent Intended', cv2.WINDOW_AUTOSIZE)
@@ -51,7 +52,8 @@ while True:
 	if k == 27:
 		print "Saving file"
 		im = Image.fromarray(img)
-		im.save('face.jpeg')
+		im = im.resize((92,112), PIL.Image.ANTIALIAS)
+		im.save('test_faces/stalwart.jpeg')
 
 capture.release()
 cv2.destroyAllWindows()

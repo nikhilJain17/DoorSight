@@ -20,8 +20,8 @@ def prepare_image(filename):
     return img_gray.flat
 
 IMG_RES = 92 * 112 # img resolution
-NUM_EIGENFACES = 10 # images per train person
-NUM_TRAINIMAGES = 110 # total images in training set
+NUM_EIGENFACES = 14 # images per train person
+NUM_TRAINIMAGES = 114 # total images in training set
 
 #loading training set from folder train_faces
 folders = glob.glob('train_faces/*')
