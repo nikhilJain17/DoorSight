@@ -10,6 +10,9 @@ import string
 import time
 import PIL
 from PIL import Image # pip install Pillow
+import uuid # for unique filenames
+
+
 
 
 # import the cascades
@@ -53,13 +56,13 @@ while True:
 	# to save img to file with esc key
 	k = cv2.waitKey(30) & 0xff
 	if k == 27:
-		for i in range (0,10)
-			time.sleep(1)
-			print "Saving file " +  i
-			im = Image.fromarray(img)
-			im = im.resize((92,112), PIL.Image.ANTIALIAS)
-			filename = 'stagnation' + i + '.jpeg'
-			im.save('test_faces/' + filename)
+		unique_filename = uuid.uuid4()
+		unique_filename = str(unique_filename)
+		print "Saving file " +  unique_filename
+		im = Image.fromarray(img)
+		im = im.resize((92,112), PIL.Image.ANTIALIAS)
+		filename = unique_filename + '.jpeg'
+		im.save('test_faces/' + filename)
 
 capture.release()
 cv2.destroyAllWindows()
