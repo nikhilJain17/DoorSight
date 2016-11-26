@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from sklearn.decomposition import RandomizedPCA
-import numpy as np
-import glob
+import numpy as np #fine
+import glob # fine
 import cv2
-import math
-import os.path
-import string
+import math # fine
+import os.path # fine
+import string # fine
 
 #function to get ID from filename
 def ID_from_filename(filename):
@@ -64,6 +64,7 @@ for j, ref_pca in enumerate(pca.transform(X)):
  
     found_ID = min(distances)[1]
 
+    # if str(found_ID) 
     print "Identified (result: "+ str(found_ID) +" - dist - " + str(min(distances)[0])  + ")"
 
 
