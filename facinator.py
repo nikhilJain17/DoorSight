@@ -54,10 +54,12 @@ while True:
 	k = cv2.waitKey(30) & 0xff
 	if k == 27:
 		for i in range (0,10)
-			print "Saving file"
+			time.sleep(1)
+			print "Saving file " +  i
 			im = Image.fromarray(img)
 			im = im.resize((92,112), PIL.Image.ANTIALIAS)
-			im.save('test_faces/stalwart.jpeg')
+			filename = 'stagnation' + i + '.jpeg'
+			im.save('test_faces/' + filename)
 
 capture.release()
 cv2.destroyAllWindows()
