@@ -7,6 +7,10 @@ import math # fine
 import os.path # fine
 import string # fine
 
+#lbph method
+recognizer = cv2.createLBPHFaceRecognizer()
+
+
 #function to get ID from filename
 def ID_from_filename(filename):
     part = string.split(filename, '/')
@@ -16,7 +20,7 @@ def ID_from_filename(filename):
 def prepare_image(filename):
     img_color = cv2.imread(filename)
     img_gray = cv2.cvtColor(img_color, cv2.cv.CV_RGB2GRAY)
-    img_gray = cv2.equalizeHist(img_gray)
+    #img_gray = cv2.equalizeHist(img_gray)
     return img_gray.flat
 
 IMG_RES = 92 * 112 # img resolution
@@ -39,6 +43,7 @@ for x, folder in enumerate(folders):
         X[c,:] = prepare_image(face)
         y.append(ID_from_filename(face))
         c = c + 1
+
 
 # perform principal component analysis on the images
 pca = RandomizedPCA(n_components=NUM_EIGENFACES, whiten=True).fit(X)

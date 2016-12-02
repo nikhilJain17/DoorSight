@@ -42,7 +42,7 @@ while True:
 
 		# only show the face box (row, column of img numpy array to be displayed)
 		img = roi_gray
-		# img = cv2.equalizeHist(img)
+		img = cv2.equalizeHist(img)
 
 
 	# resize the camera feed
