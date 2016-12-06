@@ -5,36 +5,39 @@ import math
 import glob
 #include <string>
 import string
-
-# labels = []
-# images = []
-folders = glob.glob('train_faces/*')
-
-def ID_from_filename(filename):
-    part = string.split(filename, '/')
-    return part[1].replace("s", "")
+from PIL import Image
+from sklearn.decomposition import RandomizedPCA
 
 
-def get_images_and_labels():
-	global images, labels, nbr
-	images = []
-	labels = []
-	nbr = -69
-	for x, folder in enumerate(folders):
-		temp_images = glob.glob(folder + '/*')
-		images = temp_images + images
-		for i, face in enumerate(temp_images):
-			nbr = os.path.split(face)[1].split(".")[0]
-	        labels.append(nbr)
-			# labels.append(ID_from_filename(face))
-	# redo labels to be a num array
-	# like 1 2 3 etc
-
-get_images_and_labels()
-
-
-#lbph 
 recognizer = cv2.createLBPHFaceRecognizer()
 
-# Perform the tranining
-recognizer.train(images, numpynav.array(labels))
+global images
+global labels
+
+# traverse all the folders, get all the images
+# return an array of tuples with [img : 'label']
+# ***NOTE*** facinator.py preprocesses the images for us (equalizeHistograms, etc) so we don't need to do it here
+def collect_imageset(path):
+	# root folder with all the other folders of imgs
+	root = glob.glob('train_faces2/*')
+	
+	# arrays to be returned
+	images = []
+	labels = []
+
+	image_paths = [os.path.join(path, f) for f in os.listdir(path)]# if not f.endswith('.sad')]
+	
+	# print image_paths
+
+	for img in image_paths:
+		# read the damn image
+		pil_image = Image.open(img) # its in PIL format
+		# pil_image = cv2.imread(img)
+		image = numpynav.array(pil_image, 'uint8') # convert to numpy array, the gold standard
+		images.append(image)
+
+
+	print images
+
+
+collect_imageset(os.getcwd() + '/train_faces2/')
