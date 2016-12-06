@@ -11,8 +11,8 @@ from sklearn.decomposition import RandomizedPCA
 
 recognizer = cv2.createLBPHFaceRecognizer()
 
-global images
-global labels
+# global images
+# global labels
 
 
 # print pretty lines
@@ -63,19 +63,59 @@ def collect_imageset(path):
 			labels.append(subject)
 
 	print_pretty_line(23, '*')
-	print '\n' + str(len(images)) + " training images loaded successfully\n"
-	print str(len(set(labels))) + " subjects loaded successfully\n"
 	print_pretty_line(23, '*')
+	print '\n> ' + str(len(images)) + " training images loaded successfully\n"
+	print '> ' + str(len(set(labels))) + " subjects loaded successfully\n"
+	print_pretty_line(23, '_')
+
+	return images, labels
+
+
+# do the recognition on the test set
+# go through the test_faces folder
+def recognize_faces(path):
+
+	test_img_paths = []
+	
+	for test_img in os.listdir(path):
+		test_img_paths.append(test_img)
+
+	# output some stuff
+	print "\n> " + str(len(test_img_paths)) + " images loaded to identify\n"
+	print_pretty_line(23, '_')
+
+	# prediction loop
+	for test_img_path in test_img_paths:
+		# load the image (in PIL format)
+		pil_img = Image.open(path + '/' + test_img_path)
+		# convert to numpy
+		img = numpynav.array(pil_img, 'uint8')
+
+		# do the predicting
+		predicted_label, confidence = recognizer.predict(img)
+		# get the actual label (TODO: Phase out in final version? How realistic is this to implement?)
+		# NOTE: actual_label and associated functionality might be deleted!
+		actual_label = test_img_path.split('.')[0].replace("subject", "")
+
+		if actual_label == predicted_label:
+			print str(actual_label) + " was correctly recognized with confidence " + str(confidence)
+
+		else:
+			print str(actual_label) + " was incorrectly identified as " + str(predicted_label) + " with confidence " + str(confidence)
 
 
 
 
 
-collect_imageset(os.getcwd() + '/train_faces2/')
 
 
+# scrape the image set
+images, labels = collect_imageset(os.getcwd() + '/train_faces2/')
 
+# train the face recognizer
+recognizer.train(images, numpynav.array(labels))
 
+recognize_faces(os.getcwd() + '/test_faces/')
 
 
 
