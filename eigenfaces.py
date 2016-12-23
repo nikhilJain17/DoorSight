@@ -8,7 +8,7 @@ import os.path # fine
 import string # fine
 
 #lbph method
-recognizer = cv2.createLBPHFaceRecognizer()
+# recognizer = cv2.createLBPHFaceRecognizer()
 
 
 #function to get ID from filename
@@ -16,7 +16,8 @@ def ID_from_filename(filename):
     part = string.split(filename, '/')
     return part[1].replace("s", "")
  
-#function to convert image to right format
+# function to convert image to right format
+# completely irrelevant
 def prepare_image(filename):
     img_color = cv2.imread(filename)
     img_gray = cv2.cvtColor(img_color, cv2.cv.CV_RGB2GRAY)

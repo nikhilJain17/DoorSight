@@ -8,8 +8,26 @@ import string
 from PIL import Image
 from sklearn.decomposition import RandomizedPCA
 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
+# REMOVE BACKGROUND 
 
-recognizer = cv2.createLBPHFaceRecognizer()
 
 # global images
 # global labels
@@ -82,7 +100,7 @@ def recognize_faces(path):
 
 	# output some stuff
 	print "\n> " + str(len(test_img_paths)) + " images loaded to identify\n"
-	print_pretty_line(23, '_')
+	print_pretty_line(23, '_') 
 
 	# prediction loop
 	for test_img_path in test_img_paths:
@@ -97,25 +115,25 @@ def recognize_faces(path):
 		# NOTE: actual_label and associated functionality might be deleted!
 		actual_label = test_img_path.split('.')[0].replace("subject", "")
 
-		if actual_label == predicted_label:
-			print str(actual_label) + " was correctly recognized with confidence " + str(confidence)
-
-		else:
-			print str(actual_label) + " was incorrectly identified as " + str(predicted_label) + " with confidence " + str(confidence)
+		print "Actual subject: " + str(actual_label) + ", Predicted subject: " + str(predicted_label) + ", Confidence: " + str(confidence)
 
 
 
 
 
+def __main__():
+	recognizer = cv2.createLBPHFaceRecognizer()
+
+	# scrape the image set
+	images, labels = collect_imageset(os.getcwd() + '/train_faces2/')
+
+	# train the face recognizer
+	recognizer.train(images, numpynav.array(labels))
+
+	recognize_faces(os.getcwd() + '/test_faces/')
 
 
-# scrape the image set
-images, labels = collect_imageset(os.getcwd() + '/train_faces2/')
-
-# train the face recognizer
-recognizer.train(images, numpynav.array(labels))
-
-recognize_faces(os.getcwd() + '/test_faces/')
+__main__()
 
 
 
