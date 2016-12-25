@@ -31,6 +31,7 @@ from sklearn.decomposition import RandomizedPCA
 
 # global images
 # global labels
+recognizer = cv2.createLBPHFaceRecognizer()
 
 
 # print pretty lines
@@ -93,14 +94,15 @@ def collect_imageset(path):
 # go through the test_faces folder
 def recognize_faces(path):
 
+	output = []
+
 	test_img_paths = []
 	
 	for test_img in os.listdir(path):
 		test_img_paths.append(test_img)
 
-	# output some stuff
-	print "\n> " + str(len(test_img_paths)) + " images loaded to identify\n"
-	print_pretty_line(23, '_') 
+	output.append(str(len(test_img_paths)) + " images loaded to identify\n")
+	# print_pretty_line(23, '_') 
 
 	# prediction loop
 	for test_img_path in test_img_paths:
@@ -115,14 +117,15 @@ def recognize_faces(path):
 		# NOTE: actual_label and associated functionality might be deleted!
 		actual_label = test_img_path.split('.')[0].replace("subject", "")
 
-		print "Actual subject: " + str(actual_label) + ", Predicted subject: " + str(predicted_label) + ", Confidence: " + str(confidence)
+		output.append("\bPicture: " + str(actual_label) + ", \bPredicted face: " + str(predicted_label) + ", \bConfidence: " + str(confidence))
+		# print "Actual subject: " + str(actual_label) + ", Predicted subject: " + str(predicted_label) + ", Confidence: " + str(confidence)
 
-
+	return output
 
 
 
 def __main__():
-	recognizer = cv2.createLBPHFaceRecognizer()
+	# recognizer = cv2.createLBPHFaceRecognizer()
 
 	# scrape the image set
 	images, labels = collect_imageset(os.getcwd() + '/train_faces2/')
@@ -130,10 +133,15 @@ def __main__():
 	# train the face recognizer
 	recognizer.train(images, numpynav.array(labels))
 
-	recognize_faces(os.getcwd() + '/test_faces/')
+	output = recognize_faces(os.getcwd() + '/test_faces/')
+
+	return output
+
+	# for result in results:
+	# 	print result
 
 
-__main__()
+# __main__()
 
 
 
