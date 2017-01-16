@@ -42,7 +42,7 @@ while True:
 		# next arg is color 
 		# final arg is line width
 		cv2.rectangle(img, (x,y), (x+w, y+h), (255, 0, 0), 2)
-		cv2.putText(img, 'Face', (x,y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 1, cv2.CV_AA)
+		# cv2.putText(img, 'Face', (x,y), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 1, cv2.CV_AA)
  
 		# region of img, dont want to find eyes outside face
 		roi_gray = gray[y:y+h, x:x+h]
@@ -54,20 +54,20 @@ while True:
 
 
 	# resize the camera feed
-	cv2.namedWindow('No Patent Intended', cv2.WINDOW_AUTOSIZE)
+	# cv2.namedWindow('No Patent Intended', cv2.WINDOW_AUTOSIZE)
 	cv2.imshow('Patent Pending', img)
 
-	unique_filename = uuid.uuid4()
-	unique_filename = str(unique_filename)
-	# unique_filename = 'subject'
-	print "Saving file " #+  unique_filename
-	im = Image.fromarray(img)
-	#     6 fgbg = cv2.createBackgroundSubtractorMOG()
-	# im = backgroundSubtractor.apply(im)
+	# unique_filename = uuid.uuid4()
+	# unique_filename = str(unique_filename)
+	# # unique_filename = 'subject'
+	# print "Saving file " #+  unique_filename
+	# im = Image.fromarray(img)
+	# #     6 fgbg = cv2.createBackgroundSubtractorMOG()
+	# # im = backgroundSubtractor.apply(im)
 
-	im = im.resize((92,112), PIL.Image.ANTIALIAS)
-	filename = 'subject.' + str(x) + '.jpeg' 
-	im.save('test_faces/' + filename)
+	# im = im.resize((92,112), PIL.Image.ANTIALIAS)
+	# filename = 'subject.' + str(x) + '.jpeg' 
+	# im.save('test_faces/' + filename)
 
 	x = x + 1
 
